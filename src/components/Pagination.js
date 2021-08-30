@@ -35,8 +35,9 @@ function Pagination({cards: {states}}) {
     },[page])
     
     return (
-        <Flex>
-            {loaded && cards.map(card => <FlashCard key={card.id} cardData={card} />)}
+        <Flex flexDirection="column" align="center">
+            {console.log('what is cards? ',cards)}
+            {loaded && cards.data.map(card => <FlashCard key={card.id} cardData={card} />)}
             <Button onClick={handleNext}>
                 Next
             </Button>
