@@ -5,7 +5,7 @@ import FlashCard from './FlashCard';
 
 // state: how many cards we've gone through
 
-function Pagination ({deck}) {
+function Pagination({deck}) {
     // Set current cards
     const [cards, setCards] = useState([]);
     const [loaded, setLoaded] = useState(false);

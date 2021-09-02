@@ -2,7 +2,7 @@
   "name": "edtech",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3005/",
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.0.0",

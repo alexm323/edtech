@@ -13,7 +13,7 @@ function FlashCard({cardData}) {
     let question = `What is the capital of ${cardData.state}?`
     let answer = `The capital is ${cardData.capital}`
     
-    const [flipped,setFlipped] = useState(false);
+    const [flipped, setFlipped] = useState(false);
 
     const handleFlip = () => {
         setFlipped(!flipped)

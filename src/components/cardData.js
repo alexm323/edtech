@@ -75,5 +75,5 @@ const capitals = {
     // `https://cdn.civil.services/us-states/flags/${slug}`
     // `https://cdn.civil.services/us-states/flags/${new-york}-large.png`
 
-module.exports = cardData;
+export default cardData;
 
