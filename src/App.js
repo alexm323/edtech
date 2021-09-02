@@ -19,7 +19,7 @@ function App() {
           <ColorModeSwitcher justifySelf="flex-end" />
           <VStack spacing={8}>
             <Box>
-              <Pagination cards={cardData} />
+              <Pagination deck={cardData} component={FlashCard} />
             </Box>
             
           </VStack>
