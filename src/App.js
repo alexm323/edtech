@@ -18,7 +18,7 @@ function App() {
           <VStack spacing={8}>
             <Box>
               
-              <Pagination deck={states} flashcard={} />
+              <Pagination deck={states} component={FlashCard} />
             </Box>
             
           </VStack>
