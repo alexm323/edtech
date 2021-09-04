@@ -9,6 +9,8 @@ import {
   theme,
 } from '@chakra-ui/react';
 import states from './decks/statesDeck';
+import FlashCard from './components/FlashCard';
+
 function App() {
   return (
     <ChakraProvider theme={theme}>
