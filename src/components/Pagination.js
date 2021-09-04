@@ -35,15 +35,15 @@ function Pagination({deck, component: Component}) {
         setPage(prev  => prev + 1)
     }
 
-    return loaded ? (
+    return loaded && (
         <Flex flexDirection="column" align="center">
             {cards.map(card => <Component key={card.id} cardData={card} />)}
-            <Button onClick={handleNext}>
+            <Button onClick={handleNext} alignSelf="mt-auto">
                 Next
             </Button>
 
         </Flex>
-    ) : 'Loading'
+    )
 }
 
 export default Pagination;
