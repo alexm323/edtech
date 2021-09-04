@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react'
 import {Flex,Button} from '@chakra-ui/react'
 import axios from 'axios'
 // state: how many cards we've gone through
-// 
 
 function Pagination({deck, component: Component}) {
     // Set current cards
@@ -38,10 +37,11 @@ function Pagination({deck, component: Component}) {
 
     return loaded ? (
         <Flex flexDirection="column" align="center">
-            {loaded && cards.map(card => <Component key={card.id} cardData={card} />)}
+            {cards.map(card => <Component key={card.id} cardData={card} />)}
             <Button onClick={handleNext}>
                 Next
             </Button>
+
         </Flex>
     ) : 'Loading'
 }

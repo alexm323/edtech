@@ -1,8 +1,6 @@
 import React from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import FlashCard from './components/FlashCard';
 import Pagination from './components/Pagination';
-import cardData from './components/cardData';
 import {
   ChakraProvider,
   Box,
@@ -10,7 +8,7 @@ import {
   Grid,
   theme,
 } from '@chakra-ui/react';
-
+import states from './decks/statesDeck';
 function App() {
   return (
     <ChakraProvider theme={theme}>
@@ -19,7 +17,8 @@ function App() {
           <ColorModeSwitcher justifySelf="flex-end" />
           <VStack spacing={8}>
             <Box>
-              <Pagination deck={cardData} component={FlashCard} />
+              
+              <Pagination deck={states} component={FlashCard} />
             </Box>
             
           </VStack>
