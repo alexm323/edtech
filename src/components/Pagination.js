@@ -1,27 +1,29 @@
 import {useEffect, useState} from 'react'
 import {Flex,Button} from '@chakra-ui/react'
 import axios from 'axios'
-import FlashCard from './FlashCard';
-
 // state: how many cards we've gone through
 
-function Pagination ({deck}) {
+function Pagination({deck, component: Component}) {
     // Set current cards
     const [cards, setCards] = useState([]);
     const [loaded, setLoaded] = useState(false);
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(1)    
     
+    useEffect(() => {
+        // import axios, and paginate results in db.json
+        getFlashCards(page);
+        console.log('useEffect ran')
+        // setCards(cards)
+    },[page])
 
-    let getFlashCards = async (page) => {
+    const getFlashCards = async (page) => {
         try {
-            const data = await axios.get(`http://localhost:3005/states?_page=${page}&_limit=5`);  
-
-            console.log('data',data)
-
-            setCards(prev => data)
-            setLoaded(prev => !prev)
-
-            return data;       
+            const res = await axios.get(`http://localhost:3005/states?_page=${page}&_limit=1`);  
+            // console.log('res',res)
+            setCards((prev) => [...res.data])
+            setLoaded(true)
+            
+            return res.data;  
 
         } catch (e) {
             console.error(e)
@@ -29,30 +31,14 @@ function Pagination ({deck}) {
     }
 
     const handleNext = () => {
-        setPage(prev  => {
-            console.log('previous page ',prev);
-            let current = Number(prev) + 1
-            console.log('current page ', current)
-            return current;
-        })
-        
+        setLoaded(false)
+        setPage(prev  => prev + 1)
     }
-    
-    useEffect(() => {
-        // import axios, and paginate results in db.json
-        getFlashCards(page);
-        console.log('did it')
-        // setCards(cards)
-    }, [page])
-    
-    return (
+
+    return loaded && (
         <Flex flexDirection="column" align="center">
-
-            {console.log('what is cards? ',cards)}
-
-            {loaded && cards.data.map(card => <FlashCard key={card.id} cardData={card} />)}
-
-            <Button onClick={handleNext}>
+            {cards.map(card => <Component key={card.id} cardData={card} />)}
+            <Button onClick={handleNext} alignSelf="mt-auto">
                 Next
             </Button>
 
