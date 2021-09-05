@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {Flex,Button} from '@chakra-ui/react'
+import {Flex,Button, Heading} from '@chakra-ui/react'
 import axios from 'axios'
 // state: how many cards we've gone through
 
@@ -11,8 +11,10 @@ function Pagination({deck, component: Component}) {
     
     useEffect(() => {
         // import axios, and paginate results in db.json
-        getFlashCards(page);
-        console.log('useEffect ran')
+        if(page <= 50){
+            getFlashCards(page);
+            console.log('useEffect ran')            
+        }
         // setCards(cards)
     },[page])
 
@@ -35,15 +37,26 @@ function Pagination({deck, component: Component}) {
         setPage(prev  => prev + 1)
     }
 
-    return loaded && (
-        <Flex flexDirection="column" align="center">
-            {cards.map(card => <Component key={card.id} cardData={card} />)}
-            <Button onClick={handleNext} alignSelf="mt-auto">
-                Next
-            </Button>
-
-        </Flex>
-    )
+    if (page <= 50) {
+        return loaded && (
+            <Flex flexDirection="column" align="center">
+                {cards.map(card => <Component key={card.id} cardData={card} handleNext={handleNext} />)}
+                {/* <Button onClick={handleNext} alignSelf="mt-auto">
+                    Next
+                </Button> */}
+    
+            </Flex>
+        )
+    } else {
+        return (
+            <Flex flexDirection="column" align="center">
+                <Heading>Cards finished! Good Studying!</Heading>
+                <Button onClick={() => window.location.reload()} alignSelf="mt-auto">
+                    Home
+                </Button>
+            </Flex>
+        )
+    }
 }
 
 export default Pagination;
