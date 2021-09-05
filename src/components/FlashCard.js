@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useLayoutEffect} from 'react'
 import {Flex,Heading,Image as Img,Box} from '@chakra-ui/react';
 /* 
 Text
@@ -19,13 +19,23 @@ function FlashCard({cardData}) {
 
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         /* force a preload of the image to avoid a flicker */
         const img = new Image();
+        img.src = cardData.url;
+        img.alt = `${cardData.state} flag`
+        img.width = 400;
+        img.style.objectFit = "contain";
+        img.style.margin = "1em";
+
         img.onload = () => {
            setImageReady(true)
         }
-        img.src = cardData.url;
+
+        document.querySelector('#cardContainer').appendChild(img);
+        
+        return () => document.querySelector('#cardContainer').removeChild(img);
+
     }, [cardData.url])
 
     const handleFlip = () => {
@@ -33,13 +43,14 @@ function FlashCard({cardData}) {
     }
 
 
-    return imageReady && (
+    return  (
         <Box >
-            <Flex onClick={handleFlip} bg={flipped ? 'red.100':'blue.100'} w="100%" p={4} mb={3} flexDirection={'column'} align='center' border="4px solid #000" borderRadius="5px" >
+            <Flex id="cardContainer" onClick={handleFlip} bg={flipped ? 'red.100':'blue.100'} w="100%" p={4} mb={3} flexDirection={'column'} align='center' border="4px solid #000" borderRadius="5px" >
                 <Heading  py="0.5em" px="1.25em" fontWeight="600" background="#fff" borderRadius="5px">
                     {!flipped ? question : answer} 
                 </Heading>
-                <Img src={cardData.url} alt={`${cardData.state} flag`}  boxSize='400px' objectFit="contain" />
+                
+                {/* <Img src={cardData.url} alt={`${cardData.state} flag`}  boxSize='400px' objectFit="contain" /> */}
             </Flex>
         </Box>
     )
