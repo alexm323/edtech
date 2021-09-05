@@ -1,5 +1,5 @@
 import {useState, useEffect, useLayoutEffect} from 'react'
-import {Flex,Heading,Image as Img,Box} from '@chakra-ui/react';
+import {Spinner, Flex,Heading,Image as Img,Box, Button} from '@chakra-ui/react';
 /* 
 Text
 Heading
@@ -9,13 +9,14 @@ Grid
  <Image src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />
 */
 
-function FlashCard({cardData}) {
+function FlashCard({cardData, handleNext}) {
     let question = `What is the capital of ${cardData.state}?`
     let answer = `The capital is ${cardData.capital}`
   
     
     const [flipped, setFlipped] = useState(false);
     const [imageReady, setImageReady] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
 
 
@@ -44,15 +45,20 @@ function FlashCard({cardData}) {
 
 
     return  (
-        <Box >
-            <Flex id="cardContainer" onClick={handleFlip} bg={flipped ? 'red.100':'blue.100'} w="100%" p={4} mb={3} flexDirection={'column'} align='center' border="4px solid #000" borderRadius="5px" >
+        <>
+        <Box position="relative" >
+            <Flex id="cardContainer" onClick={handleFlip} display={!imageReady ? 'none' : 'flex'} bg={flipped ? 'red.100':'blue.100'} w="100%" p={4} mb={3} flexDirection={'column'} align='center' border="4px solid #000" borderRadius="5px" >
                 <Heading  py="0.5em" px="1.25em" fontWeight="600" background="#fff" borderRadius="5px">
                     {!flipped ? question : answer} 
                 </Heading>
                 
                 {/* <Img src={cardData.url} alt={`${cardData.state} flag`}  boxSize='400px' objectFit="contain" /> */}
             </Flex>
+            <Button onClick={handleNext} display={!imageReady ? 'none' : 'inline'} position="absolute" bottom="-100px" left="45%" >
+            Next
+            </Button>
         </Box>
+        </>
     )
     
 }

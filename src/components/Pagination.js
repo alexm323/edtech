@@ -40,10 +40,10 @@ function Pagination({deck, component: Component}) {
     if (page <= 50) {
         return loaded && (
             <Flex flexDirection="column" align="center">
-                {cards.map(card => <Component key={card.id} cardData={card} />)}
-                <Button onClick={handleNext} alignSelf="mt-auto">
+                {cards.map(card => <Component key={card.id} cardData={card} handleNext={handleNext} />)}
+                {/* <Button onClick={handleNext} alignSelf="mt-auto">
                     Next
-                </Button>
+                </Button> */}
     
             </Flex>
         )
@@ -51,7 +51,7 @@ function Pagination({deck, component: Component}) {
         return (
             <Flex flexDirection="column" align="center">
                 <Heading>Cards finished! Good Studying!</Heading>
-                <Button alignSelf="mt-auto">
+                <Button onClick={() => window.location.reload()} alignSelf="mt-auto">
                     Home
                 </Button>
             </Flex>
