@@ -46,7 +46,7 @@ function FlashCard({cardData, handleNext}) {
 
     return  (
         <>
-        <Box position="relative" >
+        <Box >
             <Flex id="cardContainer" onClick={handleFlip} display={!imageReady ? 'none' : 'flex'} bg={flipped ? 'red.100':'blue.100'} w="100%" p={4} mb={3} flexDirection={'column'} align='center' border="4px solid #000" borderRadius="5px" >
                 <Heading  py="0.5em" px="1.25em" fontWeight="600" background="#fff" borderRadius="5px">
                     {!flipped ? question : answer} 
@@ -54,7 +54,7 @@ function FlashCard({cardData, handleNext}) {
                 
                 {/* <Img src={cardData.url} alt={`${cardData.state} flag`}  boxSize='400px' objectFit="contain" /> */}
             </Flex>
-            <Button onClick={handleNext} display={!imageReady ? 'none' : 'inline'} position="absolute" bottom="-100px" left="45%" >
+            <Button onClick={handleNext} display={!imageReady ? 'none' : 'inline'} transform="translateY(50px)" >
             Next
             </Button>
         </Box>
